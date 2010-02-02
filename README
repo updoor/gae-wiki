@@ -1,0 +1,10 @@
+= README =
+
+This is wiki system on GAE.
+It is based on cccwiki within google-app-engine-samples.
+via http://code.google.com/p/google-app-engine-samples/
+
+It use google-closure-library for Editor.
+
+
+updoor's labs project. 
