@@ -3,17 +3,6 @@
 {% block title %}{{ application_name }} - {{ page.name|escape }} - Edit{% endblock %}
 
 {% block head %}
-  <script type="text/javascript" src="/static/javascript/tinymce/tiny_mce.js"></script>
-  <script type="text/javascript">
-
-  tinyMCE.init({
-  mode: "textareas",
-  theme: "advanced",
-    content_css: "/static/css/base.css",
-    auto_focus: "mce_editor_0"
-  });
-
-  </script>
   <style type="text/css">
 
   #body {
@@ -30,11 +19,26 @@
   }
 
   </style>
+  <link rel="stylesheet" href="/static/css/closure/closure/button.css" /> 
+  <link rel="stylesheet" href="/static/css/closure/closure/css/demo.css"> 
+  <link rel="stylesheet" href="/static/css/closure/closure/menus.css" /> 
+  <link rel="stylesheet" href="/static/css/closure/closure/palette.css" /> 
+  <link rel="stylesheet" href="/static/css/closure/closure/toolbar.css" /> 
+  <link rel="stylesheet" href="/static/css/closure/closure/editortoolbar.css" />
+{% endblock %}
+
+{% block foot %}
+    <script src="/static/js/app/edit.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block body %}
   <form action="{{ page.edit_url|escape }}" method="post">
-    <div><textarea rows="10" cols="50" id="content" style="width: 100%; height: 400px" name="content">{{ page.content|escape }}</textarea></div>
+    <div id="toolbar"></div>
+    <div id="edit_content" style="height:300px;overflow:auto;">{{ page.content }}</div>
+
+    <textarea rows="10" cols="50" id="content" style="width:100%;height:200px;" name="content">{{ page.content|escape }}</textarea>
+    <span class="item"><input id="display_change" style="font-weight: bold" type="button" value="Display Changes"/></span>
+
     <div class="buttons">
       <span class="item"><input style="font-weight: bold" type="submit" value="Save Changes"/></span>
       <span class="item"><input type="button" onclick="location.href='{{ page.view_url|escape }}'" value="Cancel"/></span>

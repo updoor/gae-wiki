@@ -31,6 +31,7 @@ import re
 import sys
 import urllib
 import urlparse
+import logging
 
 from google.appengine.api import datastore
 from google.appengine.api import datastore_types
@@ -122,7 +123,8 @@ class WikiPage(BaseRequestHandler):
       page_name: The wikified name of the current page.
     """
     # User must be logged in to edit
-    if not users.get_current_user():
+    user = users.get_current_user()
+    if not user or not users.is_current_user_admin():
       # The GET version of this URI is just the view/edit mode, which is a
       # reasonable thing to redirect to
       self.redirect(users.create_login_url(self.request.uri))
@@ -160,7 +162,8 @@ class Page(object):
     else:
       # New pages should start out with a simple title to get the user going
       now = datetime.datetime.now()
-      self.content = '<h1>%s</h1>' % (cgi.escape(name),)
+      logging.error(name)
+      self.content = '<h1>%s</h1>' % (cgi.escape(urllib.unquote(name)),)
       self.user = None
       self.created = now
       self.modified = now
