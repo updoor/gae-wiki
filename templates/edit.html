@@ -34,7 +34,7 @@
 {% block body %}
   <form action="{{ page.edit_url|escape }}" method="post">
     <div id="toolbar"></div>
-    <div id="edit_content" style="height:300px;overflow:auto;">{{ page.content }}</div>
+    <div id="edit_content" style="height:300px;overflow:visible;">{{ page.content }}</div>
 
     <textarea rows="10" cols="50" id="content" style="width:100%;height:200px;" name="content">{{ page.content|escape }}</textarea>
     <span class="item"><input id="display_change" style="font-weight: bold" type="button" value="Display Changes"/></span>
